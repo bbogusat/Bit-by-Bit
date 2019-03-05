@@ -1,0 +1,21 @@
+.translation-container {
+  display: inline;
+  background-color: #AFEEEE;
+  color: black;
+}
+
+.translated-word {
+  display: inline;
+}
+
+.translation-container:hover .translated-word {
+  display: none;
+}
+
+.starting-word {
+  display: none;
+}
+
+.translation-container:hover .starting-word {
+  display: inline;
+}
