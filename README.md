@@ -1,4 +1,4 @@
-<img align="left" src="images/Logo128.png">
+<img align="left" src="images/Logo48.png">
 
 # Bit by Bit
 
