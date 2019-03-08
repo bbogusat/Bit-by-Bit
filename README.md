@@ -9,7 +9,7 @@ Looking for that little extra push to help learn a new language? Look no further
   - Highlights the translated word
   - Hover to see the original word
   - Choose your difficulty
-  - Select from 60+ languages to translate to
+  - Select from 60+ languages to learn
 
 ### In Development
 >  - Save your favorite words to review later
