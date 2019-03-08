@@ -5,7 +5,10 @@ var debugMode = true;
 // If the extension is enabled then translate the page
 chrome.storage.sync.get('status', function(data) {
   if (data.status) {
-    findText(data.status);
+    chrome.storage.sync.get('difficulty', function(result) {
+      const difficulty = mapDifficulty(result.difficulty)
+      findText(difficulty);
+    });
   }
 });
 
@@ -15,7 +18,24 @@ function logMessage(str) {
   }
 }
 
-function findText() {
+function mapDifficulty(difficulty) {
+  var d;
+  switch(difficulty) {
+    case '1':
+      d = 10;
+      break;
+    case '2':
+      d = 4;
+      break;
+    case '3':
+      d = 2;
+  }
+
+  return d;
+}
+
+function findText(difficulty) {
+  logMessage('Running with difficulty: ' + difficulty);
   let wordCount = 0;
   // Get all the DOM elements
   let elements = document.getElementsByTagName("*");
@@ -44,7 +64,7 @@ function findText() {
           // Don't count words that are one letter words or numbers
           if (word && word.length >= 2 && isNaN(word)) {
             // Only translate every X words
-            if (wordCount % 20 == 0) {
+            if (wordCount % difficulty == 0) {
               logMessage("Original word " + word);
               translateWord(word, node, z);
             }

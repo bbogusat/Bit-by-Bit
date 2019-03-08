@@ -3,24 +3,39 @@
 
 <head>
   <link rel="stylesheet" href="../css/popup.css" />
-  <style>
-    button {
-      height: 30px;
-      width: 30px;
-      outline: none;
-      margin: 10px;
-    }
-  </style>
 </head>
 
 <body>
   <div>
-    <p>Toggle Conversion</p>
-  </div>
-  <label class="switch">
-        <input  id="buttonToggle" type="checkbox">
+    <strong>Enable</strong>
+
+    <div id="enableButton">
+      <label class="switch" id="single">
+        <input id="buttonToggle" type="checkbox">
         <span class="slider round"></span>
       </label>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="slidecontainer">
+
+    <div id="leftHash">
+      Easy
+    </div>
+    <div id="rightHash">
+      Hard
+    </div>
+
+    <input type="range" min="1" max="3" value="1" step="1" list="hashes" class="rangeSlider" id="dSlider">
+    <datalist id="hashes">
+      <option value=1 />
+      <option value=2 />
+      <option value=3 />
+    </datalist>
+  </div>
+
 </body>
 <script src="../javascript/popup.js"></script>
 
