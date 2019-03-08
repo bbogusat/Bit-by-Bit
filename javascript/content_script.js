@@ -3,12 +3,11 @@
 var debugMode = true;
 
 // If the extension is enabled then translate the page
-chrome.storage.sync.get('status', function(data) {
+chrome.storage.sync.get(['status', 'difficulty', 'transTo'], function(data) {
   if (data.status) {
-    chrome.storage.sync.get('difficulty', function(result) {
-      const difficulty = mapDifficulty(result.difficulty)
-      findText(difficulty);
-    });
+    // Map the difficulty to the mod value needed
+    const difficulty = mapDifficulty(data.difficulty);
+    findText(difficulty, data.transTo);
   }
 });
 
@@ -19,13 +18,14 @@ function logMessage(str) {
 }
 
 function mapDifficulty(difficulty) {
+  // If easy(1) only 5% of words, if Medium(2) 20%, Hard(3) 50%
   var d;
   switch(difficulty) {
     case '1':
-      d = 10;
+      d = 20;
       break;
     case '2':
-      d = 4;
+      d = 5;
       break;
     case '3':
       d = 2;
@@ -34,7 +34,7 @@ function mapDifficulty(difficulty) {
   return d;
 }
 
-function findText(difficulty) {
+function findText(difficulty, transTo) {
   logMessage('Running with difficulty: ' + difficulty);
   let wordCount = 0;
   // Get all the DOM elements
@@ -66,7 +66,7 @@ function findText(difficulty) {
             // Only translate every X words
             if (wordCount % difficulty == 0) {
               logMessage("Original word " + word);
-              translateWord(word, node, z);
+              translateWord(word, node, z, transTo);
             }
             wordCount++;
           }
@@ -76,12 +76,12 @@ function findText(difficulty) {
   }
 }
 
-function translateWord(word, node, wordIndex) {
+function translateWord(word, node, wordIndex, transTo) {
   const key = getApiKey();
   const uri = 'https://translation.googleapis.com/language/translate/v2?key=';
   postRequest(uri + key, {
       q: word,
-      target: 'fr',
+      target: transTo,
       format: 'text',
       model: 'base'
     })
@@ -99,6 +99,8 @@ function translateWord(word, node, wordIndex) {
 
 function getApiKey() {
   // TODO: Rewrite to grab from chrome storage and set in options page
+  // TODO: Or put function into seperate file that doesn't get pushed
+  // Fill in API Key
   const key = '';
   return key;
 }
