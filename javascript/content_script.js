@@ -1,6 +1,6 @@
 'use strict';
 // Global to show debug
-const debug = true;
+var debugMode = true;
 
 // If the extension is enabled then translate the page
 chrome.storage.sync.get('status', function(data) {
@@ -10,7 +10,7 @@ chrome.storage.sync.get('status', function(data) {
 });
 
 function logMessage(str) {
-  if (debug) {
+  if (debugMode) {
     console.log(str);
   }
 }
@@ -138,7 +138,7 @@ function replaceWord(translatedWord, node, wordIndex) {
     return;
   }
 
-  logMessage("Replacing: " + startingText.nodeValue + " -> " + translatedWord);
+  logMessage("Replacing: " + startingText.textContent + " -> " + translatedWord);
 
   let leftText = leftSide.join(" ");
   let rightText = rightSide.join(" ");
