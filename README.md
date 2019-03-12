@@ -13,3 +13,7 @@ Looking for that little extra push to help learn a new language? Look no further
 
 ### In Development
 >  - Save your favorite words to review later
+
+## Preview
+
+![Alt text](gifs/Bit-By-Bit-Demo.gif?raw=true)
